@@ -169,6 +169,7 @@
                 engineList: "web",
                 style: '\
                     margin-top:5px;\
+                    margin-left:150px;\
                 ',
                 insertIntoDoc: {
                     keyword: '//input[@name="q"]',
@@ -270,7 +271,7 @@
                     padding-left:0px;\
                 ",
                 insertIntoDoc:{
-                    keyword:'css;.input__control',
+                    keyword:'css;.HeaderForm-Input.mini-suggest__input',
                     target:'css;.main',
                     where:'beforeBegin',
                 },
@@ -393,24 +394,58 @@
                     z-index:1;\
                 ',
                 insertIntoDoc: {
-                    target: 'css;#search-main',
+                    target: 'css;#nav-tabs-container',
                     keyword: '//input[@name="q"]',
                     where: 'beforeBegin',
                 },
             },
-            {name: "neeva",
+            //自定义模块，手动添加搜索引擎
+            {name: "swisscows",
                 enabled: true,
-                // https://neeva.com/search?q=0
-                url:/^https?:\/\/neeva\.com\/search\?/i,
+                url: /^https?:\/\/swisscows\.com\/*\/(?:web|s)?/i,
                 engineList: 'web',
-                fixedTop: 80,
                 style: '\
-                    z-index:1;\
+                        margin-left: 200px;\
+                        z-index: 100;\
+                        margin-top:5px;\
+                    ',
+                style_ACBaidu: '\
+                        text-align: center;\
+                        z-index: 100;\
+                        margin-top:5px;\
+                    ',
+                insertIntoDoc: {
+                    //使用xpath获取搜索框中的值
+                    keyword: '//input[@name="query"]',
+                    //使用css样式获取搜索框中的值
+                    //keyword: 'css;.input-search',
+                    //在<section class="page-results">中找到css样式用以定位插入位置
+                    target: 'css;.summary',
+                    //插入到page-results样式上方
+                    where: 'beforeBegin',
+                },
+                //stylish: '.tabs-bottom-border{top:172px !important}'
+            },
+            {name: "qwant",
+                enabled: true,
+                url: /^https?:\/\/www\.qwant\.com/,
+                engineList: 'web',
+                style: '\
+                    padding-left:5px;\
+                    margin-top:5px;\
+                    margin-left: 180px;\
+                    margin-bottom:-10px;\
+                ',
+                style_ACBaidu: '\
+                    text-align: center;\
+                    margin-left: -120px;\
+                    margin-right: 0px;\
+                    margin-bottom:-20px;\
                 ',
                 insertIntoDoc: {
-                    target: 'css;#search header',
                     keyword: '//input[@name="q"]',
-                    where: 'afterEnd',
+                    target: 'css;.nr8JL._2loWJ._23lip',
+                    where: 'beforeBegin',
                 },
             },
 
@@ -5581,8 +5616,12 @@
         /^https?:\/\/google\.infinitynewtab\.com\/\?q/,
         /^https?:\/\/www\.zhihu\.com\/search\?/,
         /^https?:\/\/www\.iciba\.com\/word\?/,
-        /^https?:\/\/neeva\.com\/search\?/i,
         /^https?:\/\/s\.taobao\.com\/search/,
+        /^https?:\/\/swisscows\.com\/*\/(?:web|s)?/i,
+        /^https?:\/\/search\.brave\.com\/search\?/i,
+        /^https?:\/\/www\.ecosia\.org\/search\?/i,
+        /^https?:\/\/www\.qwant\.com/
+        
     ]
 
     // var hashListTag = hashList.some(function hashUrl(element, index, array){
